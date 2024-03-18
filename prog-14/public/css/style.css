@@ -35,3 +35,6 @@ label{
 .very_high{
     color: rgb(140, 0, 255);
 }
+#priority-legend{
+    font-size: 0.8em;
+}

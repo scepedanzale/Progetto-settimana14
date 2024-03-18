@@ -26,16 +26,25 @@
                     <p><b>Descrizione:</b> {{$project->description}} </p>
                     <p><b>Tipo di progetto:</b> {{$project->type}} </p>
                     <p><b>Linguaggi di programmazione:</b> {{$project->language}} </p>
-                    <p><b>Data Creazione:</b> {{$project->created_at}} </p>
                     <p><b>Data Scadenza:</b> {{$project->expiration_date}} </p>
+                    <p class="text-secondary mt-3">Creazione progetto : {{$project->created_at}} </p>
+                    <p class="text-secondary">Ultima modifica : {{$project->updated_at}} </p>
 
                     <a type="button" class="btn btn-outline-success rounded-3 my-3" href="/activities/create?id={{$project->id}}">
                         Aggiungi nuova attività
                     </a>
                             @if(count($project->activities) > 0)
-                                <p class="mt-2">
+                                <div class="mt-2 d-flex justify-content-between">
                                     <b>Attività:</b>
-                                </p>
+                                    <div id="priority-legend">
+                                        <span class="me-3"><i class="bi bi-circle-fill me-1 very_low"></i>very low</span>
+                                        <span class="me-3"><i class="bi bi-circle-fill me-1 low"></i>low</span>
+                                        <span class="me-3"><i class="bi bi-circle-fill me-1 medium"></i>medium</span>
+                                        <span class="me-3"><i class="bi bi-circle-fill me-1 high"></i>high</span>
+                                        <span class="me-3"><i class="bi bi-circle-fill me-1 very_high"></i>very_high</span>
+                                    </div>
+
+                                </div>
                                 <ul class="list-group mt-3">
                                     @foreach ($project->activities as $activity)
                                         <li class="list-group-item d-flex justify-content-between align-items-center">

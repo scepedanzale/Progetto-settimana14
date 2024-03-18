@@ -68,9 +68,17 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $project['name'] = $request->name;
+        $project['description'] = $request->description;
+        $project['type'] = $request->type;
+        $project['language'] = $request->language;
+        $project['expiration_date'] = $request->expiration_date;
+        $project['updated_at'] = Carbon::now();
+
+        $project->update();
+        return redirect('/projects');
     }
 
     /**

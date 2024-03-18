@@ -64,9 +64,14 @@ class ActivityController extends Controller
      */
     public function update(Request $request, Activity $activity)
     {
-        $activity->name = $request->name;
-        $activity->description = $request->description;
-        return $activity;
+        $activity['name'] = $request->name;
+        $activity['description'] = $request->description;
+        $activity['priority'] = $request->priority;
+        $activity['start_date'] = $request->start_date;
+        $activity['end_date'] = $request->end_date;
+        $activity['updated_at'] = Carbon::now();
+        $activity->update();
+        return redirect('/projects/' . $activity->project_id);
     }
 
     /**

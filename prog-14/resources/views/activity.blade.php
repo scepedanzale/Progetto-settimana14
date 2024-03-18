@@ -15,7 +15,11 @@
                         <p><b>Livello di priorità: </b>{{$activity->priority}}</p>
                         <p><b>Data inizio: </b>{{$activity->start_date}}</p>
                         <p><b>Data fine: </b>{{$activity->end_date}}</p>
-                        <p><b>Data Creazione: </b>{{$activity->created_at}}</p>
+                        <p class="text-secondary mt-3">Creazione attività : {{$activity->created_at}} </p>
+                        @if($activity->updated_at)
+                            <p class="text-secondary">Ultima modifica : {{$activity->updated_at}} </p>
+                        @endif
+
                         <div class="d-flex justify-content-center gap-3 mt-3">
                             <a href="/activities/{{$activity->id}}/edit" class="btn btn-outline-info w-25 rounded-5">MODIFICA</a>
                             

@@ -24,7 +24,6 @@
                         <div class="mb-3 bg-input p-2 rounded-4">
                             <label for="type" class="form-label">Priorità</label>
                             <select class="form-select" name="priority">
-                                <option selected>Seleziona priorità</option>
                                 <option value="very_low">very low</option>
                                 <option value="low">low</option>
                                 <option value="medium">medium</option>
