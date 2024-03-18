@@ -10,6 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
+                    <a href="/projects" class="btn btn-outline-secondary ms-5 rounded-3">I tuoi Progetti</a>
                 </div>
             </div>
         </div>

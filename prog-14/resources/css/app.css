@@ -1,3 +1,10 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
+
+body{
+    background-color: red !important;
+}
+p{
+    color: green;
+}

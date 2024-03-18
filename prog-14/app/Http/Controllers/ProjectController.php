@@ -15,8 +15,8 @@ class ProjectController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {   
-        $query = Project::with('activities')->get();
+    {
+        $query = Project::with('activities')->get()->where('user_id', '=', Auth::user()->id);
         if($request->has('id')){
             $query->where('id', '=', $request->get('id'));
             return view('/projectsdetail', ['projects' => $query->get()]);
@@ -37,7 +37,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only(['name', 'description']);
+        $data = $request->only(['name', 'description', 'type', 'language', 'expiration_date']);
         $data['user_id'] = Auth::user()->id;
         $data['created_at'] = Carbon::now();
         $query = DB::table('projects');
@@ -60,9 +60,9 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        return view('projectedit', ['project' => $project]);
     }
 
     /**
@@ -76,8 +76,9 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect('/projects');
     }
 }

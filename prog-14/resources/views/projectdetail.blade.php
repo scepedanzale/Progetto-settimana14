@@ -1,23 +1,59 @@
 
-@extends('templates.layout')
 
-@section('title', $project->name)
+<x-app-layout>
+    <x-slot name="header">
+        <div class=" d-flex justify-content-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Progetto') }}
+            </h2>
+            <div class=" d-flex justify-content-between gap-3">
+                <a href="/projects/{{$project->id}}/edit" class="btn btn-outline-info rounded-5">MODIFICA</a>
+                                
+                <form action="/projects/{{$project->id}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger w-100 rounded-5">ELIMINA</button>
+                </form>
+            </div>
+        </div>
+    </x-slot>
 
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <p><b>Nome:</b> {{$project->name}} </p>
+                    <p><b>Descrizione:</b> {{$project->description}} </p>
+                    <p><b>Tipo di progetto:</b> {{$project->type}} </p>
+                    <p><b>Linguaggi di programmazione:</b> {{$project->language}} </p>
+                    <p><b>Data Creazione:</b> {{$project->created_at}} </p>
+                    <p><b>Data Scadenza:</b> {{$project->expiration_date}} </p>
 
-@section('content')
-
-<ul class="list-group">
-  <li class="list-group-item">
-    <b>Nome: </b>{{$project->name}}
-  </li>
-  <li class="list-group-item">
-    <b>Descrizione: </b>{{$project->description}}
-  </li>
-  <li class="list-group-item">
-    <b>User ID: </b>{{$project->user_id}}
-  </li>
-</ul>
-
-
-
-@endsection
+                    <a type="button" class="btn btn-outline-success rounded-3 my-3" href="/activities/create?id={{$project->id}}">
+                        Aggiungi nuova attività
+                    </a>
+                            @if(count($project->activities) > 0)
+                                <p class="mt-2">
+                                    <b>Attività:</b>
+                                </p>
+                                <ul class="list-group mt-3">
+                                    @foreach ($project->activities as $activity)
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                {{$activity->name}}
+                                                <i class="bi bi-circle-fill ms-3 {{$activity->priority}}"></i>
+                                            </div>
+                                                <a type="button" class="btn btn-outline-secondary rounded-3" href="/activities/{{$activity->id}}">
+                                                    Vedi Attività
+                                                </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p>Non ci sono attività</p>
+                            @endif
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

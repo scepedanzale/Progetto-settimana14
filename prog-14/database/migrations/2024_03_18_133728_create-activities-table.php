@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->string('priority');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->foreignId('project_id');
             $table->foreign('project_id')->on('projects')->references('id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('activities');
+        //
     }
 };

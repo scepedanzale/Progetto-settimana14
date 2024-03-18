@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->string('type');
+            $table->string('language');
+            $table->date('expiration_date');
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        //
     }
 };
